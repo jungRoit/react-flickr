@@ -5,23 +5,29 @@ import {searchIcon} from '../../config/image';
 import * as ApiService from '../../services/api';
 import { flickrFeed } from '../../config/url';
 import {formatResponse} from '../../utils/utils';
+import Loader from 'react-loader-spinner'
+
 
 class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       searchText:'',
-      success: false,
+      pictures:[],
+      loading: false,
     };
   }
 
   async componentDidMount() {
     try {
+      this.setState({loading:true})
       const response = await ApiService.get(flickrFeed);
       const data = formatResponse(response);
       console.log('Data', data.items);
+      this.setState({pictures:data.items, loading:false})
     } catch (error) {
       console.log('err', error);
+      this.setState({loading:false})
     }
   }
 
@@ -54,7 +60,22 @@ class Feed extends React.Component {
         
         </div>
         <div className="content">
-
+        {this.state.loading ? (
+          <div className="loader-wrapper">
+             <Loader
+         type="ThreeDots"
+         color="#fddb3a"
+         height={150}
+         width={150} 
+      />
+          </div>
+        ):(
+          <div>
+            {this.state.pictures.map(picture => (
+              <h1>{picture.title}</h1>
+            ))}
+          </div>
+        )}
         </div>
       </div>
     );

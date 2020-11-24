@@ -1,8 +1,8 @@
 .container {
   display: flex;
   flex-grow: 1;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+
 }
 
 .sign-up-box {
@@ -79,4 +79,16 @@
 .header-right {
   display: flex;
   flex:1;
+}
+
+.content {
+  display: flex;
+  flex: 4
+}
+
+.loader-wrapper {
+  display: flex;
+  flex:1;
+  justify-content: center;
+  align-items: center;
 }
