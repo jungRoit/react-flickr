@@ -3,9 +3,6 @@
   flex-grow: 1;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: #f6f4e6;
-
 }
 
 .sign-up-box {
@@ -33,8 +30,6 @@
 
 .search-box {
   display: flex;
-  flex: 3;
-  flex-direction: column;
 }
 
 .sign-up-form {
@@ -48,8 +43,8 @@
   flex: 1;
   justify-content: center;
   align-items: center;
-  padding-top: 24px;
   flex-direction: column;
+  margin-left: 16px;
 }
 
 .link {
@@ -66,4 +61,22 @@
 .success-message {
   color: #91d18b;
   font-size: 14px;
+}
+
+.header {
+  min-height: 60px;
+  width: 100%;
+  background-color:  #41444b;
+  flex-direction: row;
+  display: flex;
+}
+
+.header-left {
+  display: flex;
+  flex:2;
+}
+
+.header-right {
+  display: flex;
+  flex:1;
 }

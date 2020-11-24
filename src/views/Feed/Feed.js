@@ -32,15 +32,15 @@ class Feed extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="sign-up-box">
-          <div className="signup-box-header">
-            <h1 className="sign-box-header-title">Flickr Feeds</h1>
+        <div className="header">
+          <div className="header-left">
+          <h1>Flickr Feed</h1>
           </div>
-          <div className="signup-box-form">
-            <form className="search-box" onSubmit={this.search}>
+          <div className="header-right">
+          <form className="search-box" onSubmit={this.search}>
               <FormInput
                 onChange={this.handleOnChange}
-                value={this.state.searchText}
+                // value={this.state.searchText}
                 label="Search"
                 type="text"
                 name="search"
@@ -51,6 +51,10 @@ class Feed extends React.Component {
               </div>
             </form>
           </div>
+        
+        </div>
+        <div className="content">
+
         </div>
       </div>
     );
