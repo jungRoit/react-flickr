@@ -21,7 +21,7 @@ const {picture} = props;
         <div className="detail-box">
           <label className="detail-label">Author:</label>
           <label className="detail-content">
-            {picture.author}
+            <button onClick={() => {props.onAuthorSelected(picture.author_id)}} className="link">{picture.author}</button>
           </label>
         </div>
         <div className="detail-box">
@@ -34,6 +34,12 @@ const {picture} = props;
           <label className="detail-label">Published At:</label>
           <label className="detail-content">
             {picture.published ? new Date(picture.published).toString(): '-'}
+          </label>
+        </div>
+        <div className="detail-box">
+          <label className="detail-label">Tags:</label>
+          <label className="detail-content">
+            {picture.tags}
           </label>
         </div>
       </div>

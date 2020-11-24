@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../../ components/Button';
 import FormInput from '../../ components/FormInput';
-import { searchIcon } from '../../config/image';
+import { searchIcon,backIcon } from '../../config/image';
 import * as ApiService from '../../services/api';
 import { flickrFeed } from '../../config/url';
 import { formatResponse } from '../../utils/utils';
@@ -19,37 +19,69 @@ class Feed extends React.Component {
   }
 
   async componentDidMount() {
+    this.getAllPictures();
+  }
+
+  getAllPictures = async () => {
     try {
       this.setState({ loading: true });
-      const response = await ApiService.get(flickrFeed);
-      const data = formatResponse(response);
-      console.log('Data', data.items);
+      const data = await this.getPictures(flickrFeed);
       this.setState({ pictures: data.items, loading: false });
     } catch (error) {
-      console.log('err', error);
       this.setState({ loading: false });
     }
   }
 
-  search = (e) => {};
+  search = async (e) => {
+    e.preventDefault();
+    console.log('search for', this.state.searchText);
+    if (this.state.searchText) {
+      try {
+        this.setState({ loading: true });
+        const tags = this.state.searchText.split(' ').join(',');
+        const data = await this.getPictures(`${flickrFeed}&tags=${tags}`);
+        this.setState({ pictures: data.items, loading: false });
+      } catch (error) {
+        this.setState({ loading: false });
+      }
+    }
+  };
 
-  handleOnChange = (e) => {};
+  handleOnChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  getPictures = async (url) => {
+    const response = await ApiService.get(url);
+    return formatResponse(response);
+  };
+
+  handleAuthorSelected = async (id) => {
+    try {
+      this.setState({ authorId: id, loading: true });
+      const data = await this.getPictures(`${flickrFeed}&id=${id}`);
+      console.log('Data', data.items);
+      this.setState({ pictures: data.items, loading: false });
+    } catch (error) {
+      this.setState({ loading: false });
+    }
+  };
 
   render() {
     return (
       <div className="container">
         <div className="header">
           <div className="header-left">
-            <h1>Flickr Feed</h1>
+            <h1 className="title">Flickr Feeds</h1>
           </div>
           <div className="header-right">
             <form className="search-box" onSubmit={this.search}>
               <FormInput
                 onChange={this.handleOnChange}
-                // value={this.state.searchText}
+                value={this.state.searchText}
                 label="Search"
                 type="text"
-                name="search"
+                name="searchText"
                 icon={searchIcon}
               />
               <div className="form-buttons">
@@ -69,7 +101,23 @@ class Feed extends React.Component {
               />
             </div>
           ) : (
-            <ListView pictures={this.state.pictures} />
+            <div className="content-wrapper">
+              {this.state.authorId && (
+                <div className="author-box">
+                  <button onClick={this.getAllPictures} className="link">
+                  <img src={backIcon} className="back-button" />
+                  </button>
+                  <label className="author-label">Images By:</label>
+                  <label className="author-content">
+                    {this.state.pictures[0].author}
+                  </label>
+                </div>
+              )}
+              <ListView
+                onAuthorSelected={this.handleAuthorSelected}
+                pictures={this.state.pictures}
+              />
+            </div>
           )}
         </div>
       </div>

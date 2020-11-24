@@ -6,7 +6,7 @@ const ListView = (props) => {
   return (
     <div className="listview">
       {props.pictures.map((picture) => (
-        <ListViewItem picture={picture} />
+        <ListViewItem picture={picture} onAuthorSelected={props.onAuthorSelected} />
       ))}
     </div>
   );

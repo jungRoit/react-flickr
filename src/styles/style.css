@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding:0;
+}
+
 .container {
   display: flex;
   flex-grow: 1;
@@ -5,37 +10,8 @@
 
 }
 
-.sign-up-box {
-  display: flex;
-  flex: 1;
-  max-width: 500px;
-  min-width: 300px;
-  min-height: 350px;
-  padding: 16px 80px;
-  background-color: #fffffe;
-  border-radius: 20px;
-  flex-direction: column;
-}
-
-.signup-box-header {
-  display: flex;
-  float: 1;
-}
-
-.sign-box-header-title {
-  color: #41444b;
-  font-size: 24px;
-  font-weight: bold;
-}
-
 .search-box {
   display: flex;
-}
-
-.sign-up-form {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
 }
 
 .form-buttons {
@@ -45,22 +21,6 @@
   align-items: center;
   flex-direction: column;
   margin-left: 16px;
-}
-
-.link {
-  text-decoration: none;
-  color: #B19928;
-  font-size: 16px;
-}
-
-.error-message {
-  color: #e11d74;
-  font-size: 14px;
-}
-
-.success-message {
-  color: #91d18b;
-  font-size: 14px;
 }
 
 .header {
@@ -74,6 +34,14 @@
 .header-left {
   display: flex;
   flex:2;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #fddb3a;
 }
 
 .header-right {
@@ -85,6 +53,13 @@
   display: flex;
   flex: 4;
   width: 100%;
+  padding: 10px 16px 0 16px;
+}
+
+.content-wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 .loader-wrapper {
@@ -102,4 +77,42 @@
 .image-wrapper-link {
   display: flex;
   flex:1;
+}
+
+.link {
+  text-decoration: none;
+  color: #41444b;
+  background-color: transparent;
+  border: none;
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+.link:focus {
+  outline: none;
+}
+
+.author-box {
+  display: flex;
+  /* justify-content: center; */
+}
+
+.author-label {
+  font-size: 32px;
+  font-weight: bold;
+  color: #000000;
+  padding-right: 8px;
+}
+
+.author-content {
+  font-size: 28px;
+  color: #41444b;
+}
+
+.back-button {
+  height: 36px;
+  width: 36px;
+  padding-right: 10px;
 }
