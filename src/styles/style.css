@@ -122,26 +122,9 @@
   flex-direction: row;
 }
 
-.sort-box {
-  display:flex;
-  align-items: center;
-  padding-right: 16px;
-  flex-direction: row;
-}
-
-.sort-label {
+.filters-label {
   font-size: 24px;
   font-weight: bold;
   color:#fddb3a;
   padding-right: 8px;
-}
-
-.sort-select {
-  height: 24px;
-  width: 120px;
-}
-
-.sort-option {
-  font-size: 16px;
-  font-style: italic;
 }
