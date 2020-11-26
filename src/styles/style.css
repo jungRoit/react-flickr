@@ -5,9 +5,8 @@
 
 .container {
   display: flex;
-  flex-grow: 1;
+  flex:1;
   flex-direction: column;
-
 }
 
 .search-box {
@@ -47,6 +46,7 @@
 .header-right {
   display: flex;
   flex:1;
+  padding-right: 16px;
 }
 
 .content {
@@ -115,4 +115,33 @@
   height: 36px;
   width: 36px;
   padding-right: 10px;
+}
+
+.filters-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.sort-box {
+  display:flex;
+  align-items: center;
+  padding-right: 16px;
+  flex-direction: row;
+}
+
+.sort-label {
+  font-size: 24px;
+  font-weight: bold;
+  color:#fddb3a;
+  padding-right: 8px;
+}
+
+.sort-select {
+  height: 24px;
+  width: 120px;
+}
+
+.sort-option {
+  font-size: 16px;
+  font-style: italic;
 }

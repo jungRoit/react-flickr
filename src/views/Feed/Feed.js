@@ -14,6 +14,8 @@ class Feed extends React.Component {
     this.state = {
       searchText: '',
       pictures: [],
+      sortOrder: 'asc',
+      sortBy: '',
       loading: false,
     };
   }
@@ -67,12 +69,72 @@ class Feed extends React.Component {
     }
   };
 
+  sortPictures = () => {
+      const pictures = this.state.pictures;
+      pictures.sort((a,b) => {
+        switch(this.state.sortBy) {
+          case 'title': {
+            return a.title.localeCompare(b.title);
+          }
+          case 'author': {
+            return a.author.localeCompare(b.author);
+          }
+          case 'date_taken': {
+            const aDate = new Date(a.date_taken);
+            const bDate = new Date(b.date_taken);
+            return aDate - bDate;
+          }
+          case 'published': {
+            const cDate = new Date(a.published);
+            const dDate = new Date(b.published);
+            return cDate - dDate;
+          }
+          default : {
+            return a.title.localeCompare(b.title);
+          }     
+        }
+      })
+      if(!this.state.sortOrder.localeCompare('desc')) {
+        pictures.reverse();
+      }
+      this.setState({pictures});
+  }
+
+  handleSortOrder = (e) => {
+    this.setState({sortOrder:e.target.value}, () => {
+      this.sortPictures();
+    });
+  }
+
+  handleSortBy = e => {
+    this.setState({sortBy: e.target.value}, () => {
+      this.sortPictures();
+    });
+  }
+
   render() {
     return (
       <div className="container">
         <div className="header">
           <div className="header-left">
             <h1 className="title">Flickr Feeds</h1>
+          </div>
+          <div className="filters-box">
+          <div className="sort-box">
+            <select onChange={this.handleSortBy} className="sort-select">
+              <option className="sort-option" defaultChecked>Sort By:</option>
+              <option className="sort-option" value={'title'}>Title</option>
+              <option className="sort-option" value={'author'}>Author</option>
+              <option className="sort-option" value={'published'}>Published Date</option>
+              <option className="sort-option" value={'date_taken'}>Taken Date</option>
+            </select>
+          </div>
+          <div className="sort-box">
+            <select onChange={this.handleSortOrder} className="sort-select">
+              <option className="sort-option" value={'asc'}>Ascending</option>
+              <option className="sort-option" value={'desc'}>Descending</option>
+            </select>
+          </div>
           </div>
           <div className="header-right">
             <form className="search-box" onSubmit={this.search}>
